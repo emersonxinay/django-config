@@ -104,3 +104,71 @@ python manage.py makemigrations blog
 ```bash
 python manage.py migrate blog
 ```
+
+## para ingresar a DJANGO SHELL
+```bash
+python manage.py shell
+```
+## dentro de shell agregamos datos a la bd
+Para importar todo
+```bash
+from blog.models import Project, Task
+
+```
+Para crear un dato 
+```bash
+ p = Project(name= "mis app")
+```
+Para guardar 
+```bash
+p.save()
+```
+Para ver todos los objetos creados
+```bash
+Project.objects.all()
+```
+Para buscarlo por id
+```bash
+Project.objects.get(id=1)
+```
+Para buscarlo por nombre
+```bash
+Project.objects.get(name="mis apps")
+```
+## para crear con claves foraneas las tablas
+guardamos en una variable una petición
+```bash
+p= Projects.objects.get(id=1)
+```
+verificar que todo este okey el query
+```bash
+p.task_set.all()
+```
+para crear un nuevo dato en tarea de acuerdo aa los atributos del modelo 
+```bash
+p.task_set.create(title="descargar")
+```
+para buscar con que nombre inicia
+```bash
+Project.objects.filter(name__startswith="mis")
+```
+# panel de administrador django 
+por defecto esta en al ruta raiz /admin
+para ingresar a la consola de super admin
+```bash
+python manage.py createsuperuser
+```
+y crearse su usuarios:
+```text
+usuario: emerson
+password: 123456
+email: emer@gmail.com
+```
+## para agregar nuestros modelos en el panel admin
+```py
+# blog/admin.py
+from .models import Project, Task
+# Register your models here.
+admin.site.register(Project)
+admin.site.register(Task)
+```
